@@ -39,13 +39,7 @@ CREATE TABLE departments (
 drop table departments;
 select*from departments;
 
-CREATE TABLE dept_emp (
-    emp_no bigint   NOT NULL,
-    dept_no varchar(5)   NOT NULL,
-	PRIMARY KEY (emp_no,dept_no),
-	FOREIGN KEY(emp_no) REFERENCES employees(emp_no),
-	FOREIGN KEY(dept_no) REFERENCES departments(dept_no)
-);
+
 
 drop table dept_emp;
 select*from dept_emp;
@@ -61,3 +55,14 @@ CREATE TABLE dept_manager (
 
 drop table dept_manager;
 select*from dept_manager;
+
+--List the following details of each employee: employee number, last name, first name, sex, and salary.
+SELECT e.emp_no,
+	e.first_name,
+	e.last_name,
+	e.sex,
+	s.salary
+FROM employees e
+JOIN salaries s
+ON e.emp_no = s.emp_no;
+
