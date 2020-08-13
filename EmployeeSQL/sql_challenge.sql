@@ -97,3 +97,13 @@ From departments d
 Join dept_emp de ON d.dept_no = de.dept_no
 Join employees e On de.emp_no = e.emp_no
 Where d.dept_name = 'Sales';
+
+--List all employees in the Sales and Development departments, including their 
+--employee number, last name, first name, and department name.
+Select e.emp_no, e.last_name, e.first_name, d.dept_name
+From departments d
+Join dept_emp de ON d.dept_no = de.dept_no
+Join employees e On de.emp_no = e.emp_no
+Where d.dept_name = 'Sales' Or d.dept_name = 'Development';
+
+
