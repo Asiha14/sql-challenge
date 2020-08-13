@@ -39,7 +39,13 @@ CREATE TABLE departments (
 drop table departments;
 select*from departments;
 
-
+CREATE TABLE dept_emp (
+    emp_no bigint   NOT NULL,
+    dept_no varchar(5)   NOT NULL,
+	PRIMARY KEY (emp_no,dept_no),
+	FOREIGN KEY(emp_no) REFERENCES employees(emp_no),
+	FOREIGN KEY(dept_no) REFERENCES departments(dept_no)
+);
 
 drop table dept_emp;
 select*from dept_emp;
@@ -77,11 +83,17 @@ Join employees e On dm.emp_no = e.emp_no;
 --employee number, last name, first name, and department name.
 Select e.emp_no, e.last_name, e.first_name, d.dept_name
 From departments d
-Join dept_manager dm ON d.dept_no = dm.dept_no
-Join employees e On dm.emp_no = e.emp_no;
+Join dept_emp de ON d.dept_no = de.dept_no
+Join employees e On de.emp_no = e.emp_no;
 
 --List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 Select first_name, last_name, sex
 From employees
 Where first_name = 'Hercules' AND last_name like 'B%';
 
+--List all employees in the Sales department, including their employee number, last name, first name, and department name.
+Select e.emp_no, e.last_name, e.first_name, d.dept_name
+From departments d
+Join dept_emp de ON d.dept_no = de.dept_no
+Join employees e On de.emp_no = e.emp_no
+Where d.dept_name = 'Sales';
